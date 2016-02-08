@@ -8,6 +8,14 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <form action="rest/hello/info" method="POST">
+            <p>
+                First Name: <input type="text" name="fname"/>
+            </p>
+            <p>
+                Last Name: <input type="text" name="lname"/>
+            </p>
+            <input type="submit" value="Submit" />
+        </form>
     </body>
 </html>
