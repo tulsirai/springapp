@@ -15,7 +15,7 @@
             <p>
                 Last Name: <input type="text" name="lname"/>
             </p>
-            <input type="submit" value="Submit" />
+            <input type="submit" value="Submit" /> 
         </form>
     </body>
 </html>

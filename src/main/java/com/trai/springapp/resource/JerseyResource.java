@@ -66,7 +66,6 @@ public class JerseyResource {
     @Path("/multiValueInfo")
     public Response resonseMsgWithMultiValueForm(MultivaluedMap<String, String> params){
         final String output = " Form parameters :\n";
-       // params.
         return null;
     }
 }
