@@ -21,8 +21,7 @@
         <param-name>contextConfigLocation</param-name>
         <param-value>com.trai.springapp.AppConfig</param-value>
     </context-param>
-    <!--End of Spring IoC-->
-    
+    <!--End of Spring IoC-->    
     
     <!--Jersey and Spring Integration-->
     <servlet>

@@ -1,6 +1,5 @@
 /*
- * http://javapapers.com/web-service/restful-services-http-basic-authentication/
- * 
+ * http://javapapers.com/web-service/restful-services-http-basic-authentication/ * 
  * 
  */
 package com.trai.springapp.resource;
