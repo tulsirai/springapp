@@ -4,7 +4,9 @@
  */
 package com.trai.springapp.resource;
 
+import com.trai.springapp.model.User;
 import com.trai.springapp.service.GreetingService;
+import com.trai.springapp.service.UserService;
 import java.util.Date;
 import javax.inject.Inject;
 import javax.ws.rs.FormParam;
@@ -16,6 +18,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.core.Response;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  *Root Resource Class - a POJO annotated with @Path, have at least one method
@@ -36,6 +39,8 @@ public class JerseyResource {
     @Inject
     private GreetingService greetingService;
     
+    @Autowired
+    private UserService userService;
     /*
     * @Produces annotation is used to specify the MIME media types of 
     * representation a resource can produce and send back to the client.
@@ -58,6 +63,11 @@ public class JerseyResource {
     @Path("/info")
     public Response resonseMsg(@FormParam("fname") String fname, @FormParam("lname") String lname){
         String output = "This all the info about " + fname + " " + lname;
+        User user = new User();
+        user.setUsername(fname);
+        user.setPassword(lname);
+        user.setEmail("noahrai@gmail.com");
+        userService.saveOrUpdate(user);
         return Response.status(Response.Status.OK).entity(output).build();
     }
     

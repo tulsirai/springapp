@@ -18,4 +18,6 @@ public interface UserService {
     List<User> list();
     
     void delete(User user);
+    
+    User getUserById(Integer id);
 }

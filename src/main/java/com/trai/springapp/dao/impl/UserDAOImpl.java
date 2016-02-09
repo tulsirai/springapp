@@ -52,4 +52,9 @@ public class UserDAOImpl implements UserDAO{
     public void delete(User user) {
         getSession().delete(user);
     }
+    
+    @Override
+    public User getUserById(Integer id){
+        return(getSession().get(User.class, id));
+    }
 }

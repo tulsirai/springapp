@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.trai.springapp;
+package com.trai.springapp.config;
 
 import javax.sql.DataSource;
 import jersey.repackaged.com.google.common.base.Preconditions;
@@ -26,8 +26,7 @@ public class DataSourceConfig {
     private Environment env;
     
     @Bean
-    public DataSource dataSource() {
-        System.out.println(env.getProperty("jdbc.url"));
+    public DataSource dataSource() {       
         final DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName(Preconditions.checkNotNull(env.getProperty("jdbc.driverClassName")));
         dataSource.setUrl(Preconditions.checkNotNull(env.getProperty("jdbc.url")));

@@ -19,4 +19,6 @@ public interface UserDAO {
     List<User> list();
     
     void delete(User user);
+    
+    User getUserById(Integer id);
 }
