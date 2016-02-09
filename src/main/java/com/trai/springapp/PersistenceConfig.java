@@ -6,12 +6,16 @@
 package com.trai.springapp;
 
 import java.util.Properties;
+import javax.sql.DataSource;
+import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
+import org.springframework.orm.hibernate4.HibernateTransactionManager;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
@@ -22,16 +26,17 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
  *
  * @author Tulasi
  */
-@Configurable
+@Configuration
 @EnableTransactionManagement
-@PropertySource({ "classpath:com/trai/springapp/config/datasource.properties"  })
+@PropertySource({"classpath:com/trai/springapp/config/datasource.properties"})
 public class PersistenceConfig {
+
     @Autowired
     private Environment env;
-    
+
     @Autowired
-    private DataSourceConfig dataSource;
-    
+    private DataSource dataSource;
+
     public PersistenceConfig() {
         super();
     }
@@ -39,8 +44,8 @@ public class PersistenceConfig {
     @Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
         final LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
-        em.setDataSource(dataSource.dataSource());
-        em.setPackagesToScan(new String[] { "org.baeldung.persistence.model" });
+        em.setDataSource(dataSource);
+        em.setPackagesToScan(new String[]{"org.baeldung.persistence.model"});
 
         final HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
         // vendorAdapter.set
@@ -49,13 +54,22 @@ public class PersistenceConfig {
 
         return em;
     }
-    
+
     @Bean
     public PlatformTransactionManager transactionManager() {
         final JpaTransactionManager transactionManager = new JpaTransactionManager();
         transactionManager.setEntityManagerFactory(entityManagerFactory().getObject());
 
         return transactionManager;
+    }
+
+    @Bean
+    @Autowired
+    public HibernateTransactionManager transactionManager(SessionFactory sessionFactory) {
+        HibernateTransactionManager txManager = new HibernateTransactionManager();
+        txManager.setSessionFactory(sessionFactory);
+
+        return txManager;
     }
 
     @Bean
@@ -67,7 +81,7 @@ public class PersistenceConfig {
         final Properties hibernateProperties = new Properties();
         hibernateProperties.setProperty("hibernate.hbm2ddl.auto", env.getProperty("hibernate.hbm2ddl.auto"));
         hibernateProperties.setProperty("hibernate.dialect", env.getProperty("hibernate.dialect"));
-        // hibernateProperties.setProperty("hibernate.globally_quoted_identifiers", "true");
+        hibernateProperties.setProperty("hibernate.globally_quoted_identifiers", "true");
         return hibernateProperties;
     }
 }

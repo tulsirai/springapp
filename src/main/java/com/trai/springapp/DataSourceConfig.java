@@ -10,7 +10,6 @@ import jersey.repackaged.com.google.common.base.Preconditions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Profile;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
@@ -27,7 +26,6 @@ public class DataSourceConfig {
     private Environment env;
     
     @Bean
-    @Profile("test")
     public DataSource dataSource() {
         System.out.println(env.getProperty("jdbc.url"));
         final DriverManagerDataSource dataSource = new DriverManagerDataSource();
