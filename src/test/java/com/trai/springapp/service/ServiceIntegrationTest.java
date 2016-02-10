@@ -5,7 +5,6 @@
  */
 package com.trai.springapp.service;
 
-import com.trai.springapp.config.MainConfig;
 import com.trai.springapp.model.User;
 import org.junit.Assert;
 import org.junit.Test;
@@ -19,15 +18,15 @@ import org.springframework.transaction.annotation.Transactional;
  *
  * @author Tulasi
  */
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = MainConfig.class)
-@Transactional
+//@RunWith(SpringJUnit4ClassRunner.class)
+//@ContextConfiguration(classes = MainConfig.class)
+//@Transactional
 public class ServiceIntegrationTest {
     
     @Autowired
     private UserService userService;
     
-    @Test
+//    @Test
     public void saveUserTest(){
 //        User user = new User();
 //        user.setUsername("test");

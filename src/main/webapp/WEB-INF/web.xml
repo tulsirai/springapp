@@ -19,7 +19,7 @@
  
     <context-param>
         <param-name>contextConfigLocation</param-name>
-        <param-value>com.trai.springapp.AppConfig</param-value>
+        <param-value>com.trai.springapp.config.MainConfig</param-value>
     </context-param>
     <!--End of Spring IoC-->    
     
