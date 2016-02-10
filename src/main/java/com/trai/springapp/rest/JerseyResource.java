@@ -2,7 +2,7 @@
  * http://javapapers.com/web-service/restful-services-http-basic-authentication/ * 
  * 
  */
-package com.trai.springapp.resource;
+package com.trai.springapp.rest;
 
 import com.trai.springapp.model.User;
 import com.trai.springapp.service.GreetingService;
