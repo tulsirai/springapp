@@ -4,11 +4,15 @@
  */
 package com.trai.springapp.rest;
 
+import com.trai.springapp.model.Comment;
 import com.trai.springapp.model.User;
+import com.trai.springapp.service.CommentService;
 import com.trai.springapp.service.GreetingService;
 import com.trai.springapp.service.UserService;
 import java.util.Date;
+import java.util.List;
 import javax.inject.Inject;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -18,7 +22,6 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.core.Response;
-import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  *Root Resource Class - a POJO annotated with @Path, have at least one method
@@ -39,8 +42,11 @@ public class JerseyResource {
     @Inject
     private GreetingService greetingService;
     
-    @Autowired
+    @Inject
     private UserService userService;
+    
+    @Inject
+    private CommentService commentService;
     /*
     * @Produces annotation is used to specify the MIME media types of 
     * representation a resource can produce and send back to the client.
@@ -57,6 +63,25 @@ public class JerseyResource {
     @Produces({MediaType.TEXT_PLAIN, MediaType.APPLICATION_JSON})
     public String getHello(@PathParam("name") String name){
         return (String.format("%s:, %S", new Date(), greetingService.greet(name)));
+    }
+    
+    @GET
+    @Path("/comment")
+    @Produces({MediaType.APPLICATION_JSON})
+    public List<Comment> getComments(){
+//        GenericEntity<List<Comment>> comments = new GenericEntity<List<Comment>>(commentService.getComments()){};        
+//        return (Response.ok(comments).build());
+//        commentService.getComments().forEach(System.out::println);
+        return (commentService.getComments());
+    }
+    
+    @POST
+    @Path("/postcomment")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces({MediaType.APPLICATION_JSON})
+    public Comment postMessage(String msg){
+        System.out.println(msg);
+        return (new Comment("Hello", "Successful"));
     }
     
     @POST

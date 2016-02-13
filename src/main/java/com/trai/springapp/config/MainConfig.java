@@ -5,14 +5,7 @@
  */
 package com.trai.springapp.config;
 
-import com.trai.springapp.dao.UserDAO;
-import com.trai.springapp.dao.impl.UserDAOImpl;
-import com.trai.springapp.service.GreetingService;
-import com.trai.springapp.service.Impl.GreetingServiceImpl;
-import com.trai.springapp.service.Impl.UserServiceImpl;
-import com.trai.springapp.service.UserService;
 import javax.inject.Inject;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.core.env.Environment;

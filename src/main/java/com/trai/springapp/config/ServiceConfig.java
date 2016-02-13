@@ -5,7 +5,9 @@
  */
 package com.trai.springapp.config;
 
+import com.trai.springapp.service.CommentService;
 import com.trai.springapp.service.GreetingService;
+import com.trai.springapp.service.Impl.CommentServiceImpl;
 import com.trai.springapp.service.Impl.GreetingServiceImpl;
 import com.trai.springapp.service.Impl.UserServiceImpl;
 import com.trai.springapp.service.UserService;
@@ -27,5 +29,10 @@ public class ServiceConfig {
     @Bean
     public UserService getUserService() {
         return (new UserServiceImpl());
+    }
+    
+    @Bean
+    public CommentService getCommentService(){
+        return (new CommentServiceImpl());
     }
 }
